@@ -1,0 +1,881 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700&display=swap');
+
+/* =====================================================
+   LIGHT THEME — default :root
+   Dark theme variables are injected by app.py when
+   dark_mode = True, overriding these at runtime.
+===================================================== */
+:root {
+    --bg-base:       #F8FAFB;
+    --bg-panel:      #EEF2F6;
+    --bg-card:       #ffffff;
+    --bg-hover:      #E2E8F0;
+    --navy:          #134E5E;
+    --blue:          #0891B2;
+    --blue-light:    #06B6D4;
+    --blue-glow:     #0E7490;
+    --teal:          #0891B2;
+    --gold:          #0E7490;
+    --gold-dim:      #155E75;
+    --green:         #16a34a;
+    --green-dim:     #15803d;
+    --amber:         #d97706;
+    --red:           #dc2626;
+    --border:        rgba(14,116,144,0.15);
+    --border-mid:    rgba(14,116,144,0.30);
+    --border-bright: rgba(14,116,144,0.50);
+    --text-main:     #0F172A;
+    --text-sub:      #475569;
+    --text-dim:      #94A3B8;
+    --header-bg1:    #134E5E;
+    --header-bg2:    #0891B2;
+    --header-text:   #ffffff;
+    --header-sub:    rgba(255,255,255,0.75);
+    --pill-color:    #CFFAFE;
+    --pill-bg:       rgba(255,255,255,0.20);
+    --pill-border:   rgba(255,255,255,0.35);
+    --badge-high:    #15803d;
+    --badge-med:     #0E7490;
+    --badge-low:     #b91c1c;
+    --dl-btn-color:  #15803d;
+    --dot-color:     rgba(14,116,144,0.05);
+    --font-sans:     'Inter', sans-serif;
+    --font-mono:     'JetBrains Mono', monospace;
+    --font-serif:    'Playfair Display', serif;
+}
+
+/* global*/
+html, body, [class*="css"] {
+    font-family: var(--font-sans) !important;
+    background-color: var(--bg-base) !important;
+    color: var(--text-main) !important;
+}
+
+/* Force Streamlit's actual containers to use our theme */
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewContainer"] > div,
+[data-testid="stMain"],
+[data-testid="stMainMenu"],
+section.main,
+section.main > div,
+.stApp {
+    background-color: var(--bg-base) !important;
+    color: var(--text-main) !important;
+}
+/* Sidebar background */
+[data-testid="stSidebar"],
+[data-testid="stSidebar"] > div,
+section[data-testid="stSidebar"] > div {
+    background-color: var(--bg-panel) !important;
+    color: var(--text-main) !important;
+}
+
+/* reduce Streamlit top toolbar height */
+header[data-testid="stHeader"] {
+    background: transparent !important;
+    height: 2.2rem !important;
+    min-height: 2.2rem !important;
+}
+
+.main .block-container {
+    background-color: var(--bg-base) !important;
+    background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+    background-size: 28px 28px;
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+}
+/* Force all text in main content to use theme colors */
+.main p, .main span, .main li, .main h1, .main h2, .main h3,
+.main strong, .main label, .main div,
+.main div[data-testid="stMarkdownContainer"] p,
+.main div[data-testid="stMarkdownContainer"] span,
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] label {
+    color: var(--text-main) !important;
+}
+.main .stCaption p, .main .stCaption span,
+[data-testid="stSidebar"] .stCaption p,
+[data-testid="stSidebar"] .stCaption span {
+    color: var(--text-sub) !important;
+}
+
+/* =====================================================
+   LANDING HERO — shown when chat is empty
+   Merges greeting, branding, and topic hints in one block.
+===================================================== */
+.landing-hero {
+    text-align: center;
+    padding: 28px 20px 18px 20px;
+    animation: heroFadeIn 0.5s ease-out;
+}
+@keyframes heroFadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+.landing-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 16px;
+    border: 2px solid var(--border-mid);
+    box-shadow: 0 4px 20px var(--border);
+    margin-bottom: 12px;
+}
+.landing-greeting {
+    font-family: var(--font-sans);
+    font-size: 1.35em;
+    font-weight: 700;
+    color: var(--blue-glow) !important;
+    margin-bottom: 2px;
+}
+.landing-title {
+    font-family: var(--font-serif);
+    font-size: 1.1em;
+    font-weight: 700;
+    color: var(--text-main) !important;
+    margin-bottom: 10px;
+}
+.landing-desc {
+    font-family: var(--font-sans);
+    font-size: 0.84em;
+    font-weight: 400;
+    color: var(--text-sub) !important;
+    line-height: 1.6;
+    max-width: 480px;
+    margin: 0 auto 14px auto;
+}
+.landing-pills {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 4px;
+}
+.landing-pills .pill {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.6em;
+    font-weight: 600;
+    color: var(--text-main) !important;
+    background: var(--bg-hover);
+    border: 1px solid var(--border-mid);
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: 0.5px;
+}
+.landing-topics-label {
+    font-family: var(--font-mono);
+    font-size: 0.62em;
+    color: var(--text-sub) !important;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 6px;
+}
+
+/* topic quick-start buttons */
+.main .block-container [data-testid="stHorizontalBlock"] .stButton > button {
+    text-align: center !important;
+}
+
+/* =====================================================
+   CHAT TOPBAR — slim bar shown when messages exist
+===================================================== */
+.chat-topbar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, var(--header-bg1), var(--header-bg2));
+    border: 1px solid var(--border-mid);
+    border-radius: 8px;
+    margin-bottom: 6px;
+}
+.topbar-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+.topbar-title {
+    font-family: var(--font-serif);
+    font-size: 0.95em;
+    font-weight: 600;
+    color: var(--text-main) !important;
+    flex-grow: 1;
+}
+.topbar-pills {
+    display: flex;
+    gap: 5px;
+}
+.pill-sm {
+    font-family: var(--font-mono);
+    font-size: 0.55em;
+    font-weight: 500;
+    color: var(--pill-color) !important;
+    background: var(--pill-bg);
+    border: 1px solid var(--pill-border);
+    padding: 2px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.3px;
+}
+
+/* sidebar */
+section[data-testid="stSidebar"] {
+    background: var(--bg-panel) !important;
+    border-right: 1px solid var(--border) !important;
+}
+section[data-testid="stSidebar"] * {
+    color: var(--text-main) !important;
+}
+section[data-testid="stSidebar"] .block-container,
+section[data-testid="stSidebar"] [data-testid="stVerticalBlockBorderWrapper"] {
+    padding-top: 0 !important;
+}
+
+.sidebar-brand {
+    text-align: center;
+    padding: 22px 12px 16px 12px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 10px;
+}
+.sidebar-brand .brand-icon-img {
+    display: block;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    margin: 0 auto 10px auto;
+    border: 2px solid var(--border-mid);
+    box-shadow: 0 2px 12px var(--border);
+}
+.sidebar-brand .brand-name {
+    font-family: var(--font-serif);
+    font-size: 1.05em;
+    color: var(--blue-glow) !important;
+    display: block;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.sidebar-brand .brand-sub {
+    font-family: var(--font-mono);
+    font-size: 0.58em;
+    color: var(--text-sub) !important;
+    letter-spacing: 1.5px;
+    display: block;
+    text-transform: uppercase;
+    line-height: 1.5;
+}
+
+/* theme toggle */
+.theme-toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 4px 0 0 0;
+}
+.theme-icon {
+    font-size: 1.15em;
+    line-height: 1;
+}
+.theme-toggle-label {
+    font-family: var(--font-mono);
+    font-size: 0.76em;
+    font-weight: 500;
+    color: var(--text-sub) !important;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+}
+
+/* style the st.toggle switch — override Streamlit's red default */
+section[data-testid="stSidebar"] [data-testid="stToggle"] {
+    display: flex;
+    justify-content: center;
+    margin-top: -2px;
+    margin-bottom: 4px;
+}
+section[data-testid="stSidebar"] [data-testid="stToggle"] > label {
+    justify-content: center;
+}
+/* track background — off: solid gray visible against any sidebar bg */
+[data-testid="stToggle"] [role="checkbox"] {
+    background-color: #94A3B8 !important;
+    border: 2px solid #64748B !important;
+    border-radius: 20px !important;
+    min-width: 44px !important;
+    min-height: 24px !important;
+    transition: background-color 0.4s ease, border-color 0.4s ease !important;
+}
+/* track background — on */
+[data-testid="stToggle"] [role="checkbox"][aria-checked="true"] {
+    background-color: var(--blue) !important;
+    border-color: var(--blue-light) !important;
+}
+/* thumb circle — the key override. Streamlit colors this red by default.
+   Target every possible inner element to ensure coverage. */
+[data-testid="stToggle"] [role="checkbox"] div,
+[data-testid="stToggle"] [role="checkbox"] > div,
+[data-testid="stToggle"] [role="checkbox"] > div > div,
+[data-testid="stToggle"] label > div > div,
+[data-testid="stToggle"] label div[class*="Toggle"] div,
+[data-testid="stToggle"] [role="checkbox"]::before,
+[data-testid="stToggle"] [role="checkbox"]::after {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+    transition: background-color 0.3s ease, transform 0.3s ease !important;
+}
+/* thumb when checked — bright on dark track */
+[data-testid="stToggle"] [role="checkbox"][aria-checked="true"] div,
+[data-testid="stToggle"] [role="checkbox"][aria-checked="true"] > div,
+[data-testid="stToggle"] [role="checkbox"][aria-checked="true"] > div > div,
+[data-testid="stToggle"] label > div[aria-checked="true"] > div {
+    background-color: #ffffff !important;
+    border-color: #ffffff !important;
+}
+/* hide the toggle's text label (we use our own) */
+[data-testid="stToggle"] label span {
+    color: var(--text-sub) !important;
+}
+
+/* =====================================================
+   SMOOTH THEME TRANSITIONS
+   Applied to all major elements so light ↔ dark
+   fades smoothly instead of snapping.
+===================================================== */
+html, body,
+[class*="css"],
+.main .block-container,
+section[data-testid="stSidebar"],
+.stChatMessage,
+.stExpander,
+.stButton > button,
+.stAlert,
+.stSelectbox > div > div,
+.stDownloadButton > button,
+.stTabs [data-baseweb="tab"],
+.landing-hero,
+.chat-topbar,
+.mum-footer,
+.sidebar-brand,
+.stat-box,
+.sec-head,
+.src-card,
+.badge,
+.doc-row,
+.theme-toggle-label,
+.stChatInputContainer,
+.stChatInputContainer textarea {
+    transition:
+        background-color 0.45s ease,
+        background 0.45s ease,
+        color 0.35s ease,
+        border-color 0.4s ease,
+        box-shadow 0.4s ease !important;
+}
+
+/* section headers */
+.sec-head {
+    font-family: var(--font-mono) !important;
+    font-size: 0.66em !important;
+    font-weight: 500 !important;
+    color: var(--blue-glow) !important;
+    letter-spacing: 2.5px !important;
+    text-transform: uppercase !important;
+    padding: 3px 0 3px 9px !important;
+    border-left: 2px solid var(--blue) !important;
+    margin: 14px 0 8px 0 !important;
+    display: block !important;
+}
+
+/* stat cards */
+.stat-row { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin: 6px 0 10px 0; }
+.stat-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 6px;
+    text-align: center;
+}
+.stat-num { font-family: var(--font-serif); font-size: 1.5em; font-weight: 700; color: var(--blue-glow); display: block; line-height: 1.1; }
+.stat-lbl { font-family: var(--font-mono); font-size: 0.58em; color: var(--text-sub); text-transform: uppercase; letter-spacing: 1px; margin-top: 2px; display: block; }
+
+/* inline stats strip (replaces big stat boxes in doc index) */
+.sidebar-stats-strip {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 6px 0;
+    font-family: var(--font-mono);
+    font-size: 0.72em;
+    color: var(--text-sub);
+}
+.sidebar-stats-strip strong {
+    color: var(--blue-glow) !important;
+    font-size: 1.1em;
+}
+.strip-dot {
+    color: var(--border-mid);
+}
+
+/* session stats card */
+.session-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 4px 0 8px 0;
+}
+.session-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 0;
+    border-bottom: 1px solid var(--border);
+}
+.session-row:last-child { border-bottom: none; }
+.session-label {
+    font-family: var(--font-mono);
+    font-size: 0.68em;
+    color: var(--text-sub) !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.session-value {
+    font-family: var(--font-sans);
+    font-size: 0.82em;
+    font-weight: 600;
+    color: var(--blue-glow) !important;
+}
+
+/* expanders */
+.stExpander {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 8px !important;
+    margin-bottom: 4px !important;
+}
+
+/* sidebar-specific tightening */
+section[data-testid="stSidebar"] .stExpander {
+    margin-bottom: 3px !important;
+}
+section[data-testid="stSidebar"] .stButton {
+    margin-bottom: -6px !important;
+}
+section[data-testid="stSidebar"] .stCaption,
+section[data-testid="stSidebar"] .stMarkdown p {
+    font-size: 0.82em !important;
+    margin-bottom: 0 !important;
+}
+section[data-testid="stSidebar"] [data-testid="stVerticalBlock"] {
+    gap: 0.4rem !important;
+}
+
+/* language radio — compact horizontal flags */
+section[data-testid="stSidebar"] [data-testid="stRadio"] {
+    margin-top: -4px !important;
+}
+section[data-testid="stSidebar"] [data-testid="stRadio"] > div {
+    gap: 0.3rem !important;
+}
+section[data-testid="stSidebar"] [data-testid="stRadio"] label {
+    font-size: 0.78em !important;
+    padding: 4px 8px !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 6px !important;
+    transition: background 0.2s ease, border-color 0.2s ease !important;
+}
+section[data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
+    border-color: var(--blue-light) !important;
+    background: var(--bg-hover) !important;
+}
+section[data-testid="stSidebar"] [data-testid="stRadio"] label[data-checked="true"],
+section[data-testid="stSidebar"] [data-testid="stRadio"] [aria-checked="true"] + label {
+    background: var(--blue) !important;
+    border-color: var(--blue-light) !important;
+    color: var(--text-main) !important;
+}
+
+/* document index list (sidebar) */
+.doc-list {
+    max-height: 280px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+.doc-list::-webkit-scrollbar       { width: 4px; }
+.doc-list::-webkit-scrollbar-track { background: transparent; }
+.doc-list::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 2px; }
+.doc-row {
+    padding: 7px 8px;
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+}
+.doc-row:last-child { border-bottom: none; }
+.doc-row:hover { background: var(--bg-hover); }
+.doc-row-title {
+    font-family: var(--font-sans);
+    font-size: 0.78em;
+    font-weight: 500;
+    color: var(--text-main);
+    display: block;
+    line-height: 1.35;
+}
+.doc-row-meta {
+    font-family: var(--font-mono);
+    font-size: 0.62em;
+    color: var(--text-sub);
+    display: block;
+    margin-top: 1px;
+    letter-spacing: 0.3px;
+}
+
+/* source cards */
+.src-card {
+    background: var(--bg-card);
+    border-left: 3px solid var(--blue);
+    border-radius: 0 8px 8px 0;
+    padding: 11px 15px;
+    margin: 7px 0;
+}
+.src-title   { font-family: var(--font-sans); color: var(--blue-glow); font-size: 0.9em; font-weight: 600; }
+.src-meta    { font-family: var(--font-mono); color: var(--text-sub); font-size: 0.7em; margin-top: 3px; }
+.src-preview { font-family: var(--font-sans); color: var(--text-sub); font-size: 0.8em; margin-top: 7px; font-style: italic; padding-left: 8px; border-left: 1px solid var(--border); line-height: 1.5; }
+
+/* badges */
+.badge      { display: inline-block; font-family: var(--font-mono); font-size: 0.7em; font-weight: 500; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.8px; }
+.badge-high { background: rgba(34,197,94,0.1);  color: var(--badge-high); border: 1px solid rgba(34,197,94,0.35); }
+.badge-med  { background: rgba(245,158,11,0.1);  color: var(--badge-med);  border: 1px solid rgba(245,158,11,0.35); }
+.badge-low  { background: rgba(239,68,68,0.1);   color: var(--badge-low);  border: 1px solid rgba(239,68,68,0.35); }
+.badge-type { background: var(--border);  color: var(--blue-glow); border: 1px solid var(--border-mid); }
+
+/* buttons */
+.stButton > button {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 7px !important;
+    color: var(--text-main) !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.82em !important;
+    font-weight: 500 !important;
+    transition: all 0.18s ease !important;
+    text-align: left !important;
+}
+.stButton > button:hover {
+    background: var(--bg-hover) !important;
+    border-color: var(--blue-light) !important;
+    color: var(--blue-glow) !important;
+    box-shadow: 0 0 0 2px var(--border) !important;
+}
+/* sidebar buttons — compact */
+section[data-testid="stSidebar"] .stButton > button {
+    font-size: 0.76em !important;
+    padding: 6px 10px !important;
+    min-height: unset !important;
+}
+/* TTS button — subtle pulse on hover */
+.stButton > button[kind="secondary"]:has(> div > p:only-child) {
+    transition: all 0.2s ease !important;
+}
+.stChatMessage .stButton > button:hover {
+    color: var(--blue-glow) !important;
+    border-color: var(--blue-light) !important;
+}
+
+/* chat messages */
+.stChatMessage {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 10px !important;
+    margin-bottom: 10px !important;
+    padding-right: 16px !important;
+}
+.stChatMessage p,
+.stChatMessage span,
+.stChatMessage li,
+.stChatMessage h1, .stChatMessage h2, .stChatMessage h3,
+.stChatMessage strong,
+.stChatMessage div[data-testid="stMarkdownContainer"],
+.stChatMessage div[data-testid="stMarkdownContainer"] p,
+.stChatMessage div[data-testid="stMarkdownContainer"] span,
+.stChatMessage div[data-testid="stMarkdownContainer"] li {
+    color: var(--text-main) !important;
+}
+.stChatMessage .stCaption, .stChatMessage .stCaption p {
+    color: var(--text-sub) !important;
+}
+
+/* chat input — force dark bg in dark mode, light bg in light mode */
+[data-testid="stBottom"],
+[data-testid="stBottom"] > div {
+    background: var(--bg-base) !important;
+    background-color: var(--bg-base) !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.stChatInputContainer,
+[data-testid="stChatInput"] {
+    background: var(--bg-card) !important;
+    background-color: var(--bg-card) !important;
+    border: 1px solid var(--border-mid) !important;
+    border-radius: 10px !important;
+    box-shadow: none !important;
+}
+/* Force ALL inner wrappers transparent so container bg shows */
+.stChatInputContainer div,
+.stChatInputContainer > div,
+.stChatInputContainer > div > div,
+.stChatInputContainer > div > div > div,
+.stChatInputContainer > div > div > div > div,
+[data-testid="stChatInput"] div,
+[data-testid="stChatInput"] > div > div,
+[data-testid="stChatInput"] > div > div > div {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+.stChatInputContainer textarea,
+[data-testid="stChatInput"] textarea,
+[data-testid="stBottom"] textarea {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    caret-color: var(--blue-glow) !important;
+    color: var(--text-main) !important;
+}
+.stChatInputContainer textarea::placeholder,
+[data-testid="stChatInput"] textarea::placeholder,
+[data-testid="stBottom"] textarea::placeholder {
+    color: var(--text-dim) !important;
+}
+/* Inner baseweb wrappers — transparent, no borders */
+.stChatInputContainer [data-baseweb="textarea"],
+.stChatInputContainer [data-baseweb="base-input"],
+[data-testid="stChatInput"] [data-baseweb="textarea"],
+[data-testid="stChatInput"] [data-baseweb="base-input"],
+[data-testid="stBottom"] [data-baseweb="textarea"],
+[data-testid="stBottom"] [data-baseweb="base-input"] {
+    background: transparent !important;
+    background-color: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+/* Send button */
+.stChatInputContainer button,
+[data-testid="stChatInput"] button {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    color: var(--blue-glow) !important;
+}
+/* Focus state — subtle glow on outer container only */
+.stChatInputContainer:focus-within,
+[data-testid="stChatInput"]:focus-within {
+    border-color: var(--blue-light) !important;
+    box-shadow: 0 0 0 2px var(--border) !important;
+}
+
+/* Force all form inputs to use theme colors */
+.stTextInput input,
+.stSelectbox [data-baseweb="select"],
+.stSelectbox [data-baseweb="select"] > div,
+[data-baseweb="input"],
+[data-baseweb="base-input"],
+[data-baseweb="select"] {
+    background-color: var(--bg-card) !important;
+    color: var(--text-main) !important;
+    border-color: var(--border-mid) !important;
+}
+.stTextInput input::placeholder {
+    color: var(--text-dim) !important;
+}
+
+/* Tabs text */
+.stTabs [data-baseweb="tab"] {
+    color: var(--text-sub) !important;
+}
+.stTabs [data-baseweb="tab"][aria-selected="true"] {
+    color: var(--blue-glow) !important;
+}
+
+/* =====================================================
+   ALERTS
+===================================================== */
+.stAlert {
+    background: var(--bg-card) !important;
+    border-radius: 8px !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.88em !important;
+    margin-right: 16px !important;
+}
+.stAlert p, .stAlert span, .stAlert strong {
+    color: var(--text-main) !important;
+}
+
+/* Keep follow-up buttons and source expanders from touching the right edge */
+.stChatMessage .stButton > button,
+.stChatMessage .stExpander {
+    margin-right: 16px !important;
+}
+
+/* =====================================================
+   SELECT BOX
+===================================================== */
+.stSelectbox > div > div {
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border) !important;
+    border-radius: 7px !important;
+    color: var(--text-main) !important;
+    font-family: var(--font-sans) !important;
+}
+
+/* =====================================================
+   DOWNLOAD BUTTON
+===================================================== */
+.stDownloadButton > button {
+    background: rgba(34,197,94,0.07) !important;
+    border: 1px solid rgba(34,197,94,0.3) !important;
+    color: var(--dl-btn-color) !important;
+    border-radius: 7px !important;
+    font-family: var(--font-mono) !important;
+    font-size: 0.76em !important;
+}
+.stDownloadButton > button:hover {
+    background: rgba(34,197,94,0.14) !important;
+}
+
+/* =====================================================
+   TABS — underline only, no fill on hover
+===================================================== */
+.stTabs [data-baseweb="tab-list"] {
+    background: transparent !important;
+    border-bottom: 1px solid var(--border) !important;
+    gap: 0 !important;
+    margin-top: -8px !important;
+}
+.stTabs [data-baseweb="tab"] {
+    background: transparent !important;
+    border: none !important;
+    border-bottom: 2px solid transparent !important;
+    color: var(--text-sub) !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.88em !important;
+    font-weight: 500 !important;
+    padding: 10px 20px !important;
+    margin-bottom: -1px !important;
+    transition: color 0.18s ease, border-color 0.18s ease !important;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    background: transparent !important;
+    color: var(--blue-glow) !important;
+    border-bottom: 2px solid var(--blue-light) !important;
+}
+.stTabs [aria-selected="true"] {
+    background: transparent !important;
+    color: var(--blue-glow) !important;
+    border-bottom: 2px solid var(--blue-light) !important;
+    font-weight: 600 !important;
+}
+.stTabs [data-baseweb="tab-highlight"] {
+    display: none !important;
+}
+
+/* =====================================================
+   RESPONSE LENGTH SLIDER
+   Brief = red  |  Standard = amber  |  Detailed = green
+   Track line AND thumb both change color.
+   The filled track color is injected dynamically by app.py
+   based on the current slider value via .slider-brief/standard/detailed class.
+===================================================== */
+
+/* thumb styling per value */
+div[data-testid="stSlider"] [role="slider"] {
+    background: #ef4444 !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.25) !important;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
+}
+div[data-testid="stSlider"] [aria-valuenow="0"] {
+    background: #ef4444 !important;
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(239,68,68,0.25) !important;
+}
+div[data-testid="stSlider"] [aria-valuenow="1"] {
+    background: #f59e0b !important;
+    border-color: #f59e0b !important;
+    box-shadow: 0 0 0 3px rgba(245,158,11,0.25) !important;
+}
+div[data-testid="stSlider"] [aria-valuenow="2"] {
+    background: #22c55e !important;
+    border-color: #22c55e !important;
+    box-shadow: 0 0 0 3px rgba(34,197,94,0.25) !important;
+}
+
+/* =====================================================
+   SCROLLBAR
+===================================================== */
+::-webkit-scrollbar       { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-base); }
+::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: var(--blue); }
+
+/* =====================================================
+   FOOTER
+===================================================== */
+.mum-footer {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.62em;
+    color: var(--text-sub);
+    letter-spacing: 1.5px;
+    padding: 8px 0;
+    border-top: 1px solid var(--border);
+    margin-top: 12px;
+}
+
+/* =====================================================
+   SPINNER — loading indicator with CSS-only animation
+===================================================== */
+@keyframes mum-spin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+[data-testid="stSpinner"] > div {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    border: 1px solid var(--border-mid) !important;
+    background: var(--bg-card) !important;
+    border-radius: 10px !important;
+    padding: 14px 20px !important;
+    width: fit-content !important;
+}
+/* Hide Streamlit's default SVG spinner — we replace it with CSS */
+[data-testid="stSpinner"] svg {
+    display: none !important;
+}
+/* CSS spinner ring — always visible and animated */
+[data-testid="stSpinner"] > div::before {
+    content: '' !important;
+    display: block !important;
+    flex-shrink: 0 !important;
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 22px !important;
+    min-height: 22px !important;
+    border: 3px solid var(--border) !important;
+    border-top: 3px solid var(--blue-light) !important;
+    border-radius: 50% !important;
+    animation: mum-spin 0.8s linear infinite !important;
+    box-sizing: border-box !important;
+}
+/* Spinner text */
+[data-testid="stSpinner"] span,
+[data-testid="stSpinner"] p {
+    color: var(--text-main) !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.9em !important;
+}

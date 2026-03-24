@@ -1,0 +1,305 @@
+{
+  "metadata": {
+    "created": "2026-03-17",
+    "author": "Benedict R. Kamazima — M00977722",
+    "module": "CST3990 — Middlesex University Mauritius",
+    "description": "Evaluation dataset for the MUM RAG Policy Chatbot. 30 queries across three difficulty levels with ground-truth answers and source references. Used by evaluate.py to compute Precision@k, Recall@k, RAGAs metrics, latency, and robustness scores.",
+    "total_queries": 30,
+    "levels": {
+      "1": {
+        "count": 10,
+        "description": "Direct factual retrieval from a single policy clause. No interpretation required."
+      },
+      "2": {
+        "count": 10,
+        "description": "Scenario-based: requires interpreting and applying policy language to a described situation."
+      },
+      "3": {
+        "count": 10,
+        "description": "Multi-document synthesis: requires combining information from two or more policy documents."
+      }
+    }
+  },
+  "queries": [
+    {
+      "id": "L1_001",
+      "level": 1,
+      "question": "What are the categories of student misconduct at MUM?",
+      "ground_truth": "The MUM Student Conduct and Discipline Rules define two main categories of misconduct: minor misconduct and major misconduct. Minor misconduct includes lesser breaches such as disruption or disrespect. Major misconduct includes more serious offences such as violence, harassment, discrimination, academic dishonesty, and criminal activity.",
+      "ground_truth_sources": ["(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {
+        "paraphrase": "What types of student misconduct does MUM recognise in its policies?",
+        "keyword_reduced": "MUM misconduct categories students",
+        "typo": "Wha are the categores of studnt misconduct at MUM?"
+      }
+    },
+    {
+      "id": "L1_002",
+      "level": 1,
+      "question": "What is the purpose of the Fitness to Study Policy?",
+      "ground_truth": "The Fitness to Study Policy is designed to support students whose physical or mental health, behaviour, or circumstances are affecting their ability to study safely or effectively, or who may be presenting a risk to themselves or others. It aims to ensure students receive appropriate support rather than being processed through disciplinary procedures where health is a contributing factor.",
+      "ground_truth_sources": ["(FINAL)-202425-Fitness-to-Study-Policy.pdf"],
+      "variants": {
+        "paraphrase": "What does the Fitness to Study Policy at Middlesex University Mauritius aim to achieve?",
+        "keyword_reduced": "Fitness to Study Policy purpose MUM",
+        "typo": "Waht is the purpse of the Fitnss to Study Polcy?"
+      }
+    },
+    {
+      "id": "L1_003",
+      "level": 1,
+      "question": "What is the definition of personal data under the MUM Data Protection Policy?",
+      "ground_truth": "Personal data means any information relating to an identified or identifiable living individual. This includes names, identification numbers, location data, and online identifiers, as well as factors specific to the physical, physiological, genetic, mental, economic, cultural, or social identity of that person.",
+      "ground_truth_sources": ["Middlesex-University-Data-Protection-Policy.docx"],
+      "variants": {
+        "paraphrase": "How does MUM's data protection policy define what counts as personal data?",
+        "keyword_reduced": "personal data definition MUM data protection",
+        "typo": "Waht is personl data undr the Data Protecton Policy?"
+      }
+    },
+    {
+      "id": "L1_004",
+      "level": 1,
+      "question": "What does the Acceptable Use Policy say about unauthorised access to systems?",
+      "ground_truth": "The Acceptable Use Policy prohibits users from attempting to gain unauthorised access to any computer system, network, or data. This includes using another person's credentials, exploiting security vulnerabilities, or accessing systems beyond one's authorised level. Violations may lead to disciplinary action and referral to law enforcement.",
+      "ground_truth_sources": ["Acceptable-Use-Policy.pdf"],
+      "variants": {
+        "paraphrase": "What rules does the Acceptable Use Policy set out regarding accessing systems without permission?",
+        "keyword_reduced": "unauthorised access systems acceptable use policy",
+        "typo": "Waht does the Acceptble Use Polcy say about unauthrised acccess?"
+      }
+    },
+    {
+      "id": "L1_005",
+      "level": 1,
+      "question": "Who is responsible for safeguarding at Middlesex University Mauritius?",
+      "ground_truth": "Overall responsibility for safeguarding rests with senior leadership. A designated Safeguarding Lead is appointed to oversee safeguarding matters, receive concerns, and liaise with external agencies. All staff have a duty to be aware of safeguarding issues and to report concerns through appropriate channels.",
+      "ground_truth_sources": ["Safeguarding-Policy-March-2022.pdf"],
+      "variants": {
+        "paraphrase": "Who holds responsibility for safeguarding at MUM and who should staff report concerns to?",
+        "keyword_reduced": "safeguarding responsibility MUM who",
+        "typo": "Who is responsble for safgurding at Middlesx University?"
+      }
+    },
+    {
+      "id": "L1_006",
+      "level": 1,
+      "question": "What notice must be given to a student before a disciplinary panel hearing?",
+      "ground_truth": "The Student Conduct and Discipline Rules specify that a student must be given reasonable written notice before a formal disciplinary panel hearing. The notice must state the date, time, location, the nature of the alleged misconduct, and the student's right to be accompanied. Adequate notice must be given to allow the student to prepare their response.",
+      "ground_truth_sources": ["(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {
+        "paraphrase": "How much advance notice must MUM give a student before holding a disciplinary hearing?",
+        "keyword_reduced": "notice disciplinary panel hearing student",
+        "typo": "Whta is the minnimum notce befor a discplinry panel?"
+      }
+    },
+    {
+      "id": "L1_007",
+      "level": 1,
+      "question": "What types of data does the Appropriate Policy Document cover?",
+      "ground_truth": "The Middlesex University Appropriate Policy Document covers special category personal data as defined under UK GDPR and the Data Protection Act 2018. This includes data revealing racial or ethnic origin, political opinions, religious beliefs, trade union membership, genetic data, biometric data, health data, sex life, and sexual orientation.",
+      "ground_truth_sources": ["Middlesex-University-Appropriate-Policy-Document.docx"],
+      "variants": {
+        "paraphrase": "What sensitive data categories are addressed by the Appropriate Policy Document?",
+        "keyword_reduced": "Appropriate Policy Document data types",
+        "typo": "Waht types of dat does the Apropriate Polcy Docment cover?"
+      }
+    },
+    {
+      "id": "L1_008",
+      "level": 1,
+      "question": "Can a student appeal against a disciplinary decision at MUM?",
+      "ground_truth": "Yes. The Student Conduct and Discipline Rules include a right of appeal against disciplinary decisions. A student may appeal on grounds such as procedural irregularity, new evidence not available at the hearing, or the severity of the sanction being disproportionate to the misconduct. The appeal must normally be submitted within a specified timeframe following the decision.",
+      "ground_truth_sources": ["(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {
+        "paraphrase": "Does MUM allow students to appeal a disciplinary outcome?",
+        "keyword_reduced": "student appeal disciplinary decision MUM",
+        "typo": "Can a stuednt appael agianst a disicplinary decison?"
+      }
+    },
+    {
+      "id": "L1_009",
+      "level": 1,
+      "question": "What is the lawful basis for processing student data at Middlesex University?",
+      "ground_truth": "The Data Protection Policy states that personal data must be processed on a lawful basis. For students, the primary lawful bases include performance of a contract (the student's registration agreement), compliance with a legal obligation, and legitimate interests of the university. Special category data requires an additional condition such as explicit consent or substantial public interest.",
+      "ground_truth_sources": ["Middlesex-University-Data-Protection-Policy.docx"],
+      "variants": {
+        "paraphrase": "What legal grounds does MUM rely on when processing personal data about students?",
+        "keyword_reduced": "lawful basis processing student data MUM",
+        "typo": "Waht is the lawful bais for procesing stuednt data?"
+      }
+    },
+    {
+      "id": "L1_010",
+      "level": 1,
+      "question": "What is prohibited under the Acceptable Use Policy regarding digital communications?",
+      "ground_truth": "The Acceptable Use Policy prohibits using MUM's digital communication systems to send offensive, harassing, threatening, or discriminatory content. It also prohibits sending spam, sharing copyrighted material without authorisation, and using institutional systems for personal commercial gain.",
+      "ground_truth_sources": ["Acceptable-Use-Policy.pdf"],
+      "variants": {
+        "paraphrase": "What restrictions does the Acceptable Use Policy place on how staff and students use MUM email and digital communications?",
+        "keyword_reduced": "prohibited digital communications acceptable use",
+        "typo": "Waht is prohibted undr Acceptble Use Polcy for comunications?"
+      }
+    },
+    {
+      "id": "L2_001",
+      "level": 2,
+      "question": "A student has severe anxiety affecting their attendance. Should they be referred to the disciplinary process or Fitness to Study?",
+      "ground_truth": "Where conduct or attendance issues are linked to a mental health condition such as anxiety, the Fitness to Study Policy is the appropriate initial route. It is designed for situations where health is affecting behaviour and prioritises support over sanction. The disciplinary process should only be engaged if health-related concerns are resolved but the conduct continues.",
+      "ground_truth_sources": ["(FINAL)-202425-Fitness-to-Study-Policy.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L2_002",
+      "level": 2,
+      "question": "A student was found sharing their university login credentials with a friend. What policy has been breached and what are the consequences?",
+      "ground_truth": "Sharing university login credentials breaches the Acceptable Use Policy, which explicitly prohibits sharing account access. This may also constitute a breach of the Student Conduct and Discipline Rules as misuse of university resources. Consequences could range from a formal warning to more serious disciplinary action depending on severity and intent.",
+      "ground_truth_sources": ["Acceptable-Use-Policy.pdf", "(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L2_003",
+      "level": 2,
+      "question": "A lecturer suspects a student may be at risk of self-harm. What steps should the lecturer take under the Safeguarding Policy?",
+      "ground_truth": "Under the Safeguarding Policy, the lecturer should not investigate independently. They should report concerns to the designated Safeguarding Lead immediately, document what they observed, and let the Safeguarding Lead coordinate the response, which may include contacting welfare services or emergency responders.",
+      "ground_truth_sources": ["Safeguarding-Policy-March-2022.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L2_004",
+      "level": 2,
+      "question": "A student received a disciplinary warning but was not told about their right to appeal. Has the correct process been followed?",
+      "ground_truth": "No. The Student Conduct and Discipline Rules require that students are informed of their right to appeal following a disciplinary hearing. Failure to inform the student constitutes a procedural irregularity, which the student may use as grounds for appeal.",
+      "ground_truth_sources": ["(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L2_005",
+      "level": 2,
+      "question": "A staff member wants to share a student's health information with their personal tutor. Is this permitted under the Data Protection Policy?",
+      "ground_truth": "Health data is special category personal data requiring a higher standard of protection. Sharing it requires a lawful basis plus an additional GDPR condition such as explicit consent from the student. The staff member should obtain explicit consent before sharing, unless there is an overriding safeguarding concern.",
+      "ground_truth_sources": ["Middlesex-University-Data-Protection-Policy.docx", "Middlesex-University-Appropriate-Policy-Document.docx"],
+      "variants": {}
+    },
+    {
+      "id": "L2_006",
+      "level": 2,
+      "question": "A student is accused of verbally harassing another student on campus. Which policy applies and what process should be followed?",
+      "ground_truth": "Verbal harassment falls under major misconduct in the Student Conduct and Discipline Rules. A formal investigation should be initiated, the accused student notified of the allegation and given opportunity to respond, and a disciplinary panel may be convened. The complainant should be kept informed of the outcome.",
+      "ground_truth_sources": ["(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L2_007",
+      "level": 2,
+      "question": "Can a student use university computers to run a small private business selling handmade goods?",
+      "ground_truth": "No. The Acceptable Use Policy prohibits using university IT systems for personal commercial gain. Using university computers to run a private business breaches this policy.",
+      "ground_truth_sources": ["Acceptable-Use-Policy.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L2_008",
+      "level": 2,
+      "question": "A student required to take leave of absence under Fitness to Study — what support should they receive?",
+      "ground_truth": "Under the Fitness to Study Policy, the student must be given clear information about conditions for return, what support is available during leave, and the process for applying to return. The university is responsible for maintaining contact and facilitating the student's return when they are able to do so safely.",
+      "ground_truth_sources": ["(FINAL)-202425-Fitness-to-Study-Policy.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L2_009",
+      "level": 2,
+      "question": "A student requests access to all personal data MUM holds about them. What are their rights and how should MUM respond?",
+      "ground_truth": "Students have the right to submit a Subject Access Request. MUM must respond within one month with a copy of the personal data and information about the purposes of processing. The deadline may be extended by two further months for complex requests, but the student must be informed within the first month.",
+      "ground_truth_sources": ["Middlesex-University-Data-Protection-Policy.docx"],
+      "variants": {}
+    },
+    {
+      "id": "L2_010",
+      "level": 2,
+      "question": "A staff member observes a student displaying significant distress and erratic behaviour in a lecture. What should the staff member do?",
+      "ground_truth": "The staff member should report concerns to the Safeguarding Lead promptly under the Safeguarding Policy. If the behaviour indicates a health condition, the Fitness to Study Policy may also be engaged. If there is immediate risk of harm, emergency responders may need to be contacted.",
+      "ground_truth_sources": ["Safeguarding-Policy-March-2022.pdf", "(FINAL)-202425-Fitness-to-Study-Policy.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L3_001",
+      "level": 3,
+      "question": "How do the Student Conduct and Discipline Rules and the Fitness to Study Policy interact when mental health is a contributing factor to alleged misconduct?",
+      "ground_truth": "Where alleged misconduct may be related to mental health, the university should first assess whether the Fitness to Study process is more appropriate. The two processes can run in parallel. The disciplinary process may be paused pending a fitness to study assessment, but if conduct is serious and not wholly attributable to health, or the student has recovered but conduct continues, the disciplinary process may proceed.",
+      "ground_truth_sources": ["(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "(FINAL)-202425-Fitness-to-Study-Policy.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L3_002",
+      "level": 3,
+      "question": "What safeguarding and data protection obligations does MUM have when a student discloses abuse?",
+      "ground_truth": "The Safeguarding Policy requires the Safeguarding Lead to be notified and to consider involving external agencies. The Data Protection Policy and Appropriate Policy Document allow disclosure of special category data to agencies without consent where necessary to protect from serious harm. Confidentiality cannot be guaranteed in safeguarding situations.",
+      "ground_truth_sources": ["Safeguarding-Policy-March-2022.pdf", "Middlesex-University-Data-Protection-Policy.docx", "Middlesex-University-Appropriate-Policy-Document.docx"],
+      "variants": {}
+    },
+    {
+      "id": "L3_003",
+      "level": 3,
+      "question": "A student is accused of academic misconduct and of using university systems to assist with it. How should both be handled?",
+      "ground_truth": "Both charges can be addressed within the same disciplinary process under the Student Conduct and Discipline Rules. The Acceptable Use Policy violation is a separate charge within the same investigation. Both must be communicated to the student in writing and the student must have the opportunity to respond to each charge. A single panel can consider multiple charges from the same incident.",
+      "ground_truth_sources": ["(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Acceptable-Use-Policy.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L3_004",
+      "level": 3,
+      "question": "What is the difference between the Middlesex University Data Protection Policy and the Appropriate Policy Document?",
+      "ground_truth": "The Data Protection Policy sets out the overall framework for handling all personal data under UK GDPR and the DPA 2018, covering principles such as lawfulness, fairness, and accountability. The Appropriate Policy Document is a specific instrument required by Schedule 1 DPA 2018 for processing special category and criminal convictions data, documenting the specific conditions and safeguards that apply. Together they form a layered framework.",
+      "ground_truth_sources": ["Middlesex-University-Data-Protection-Policy.docx", "Middlesex-University-Appropriate-Policy-Document.docx"],
+      "variants": {}
+    },
+    {
+      "id": "L3_005",
+      "level": 3,
+      "question": "What responsibilities do MUM staff have under both the Safeguarding Policy and the Acceptable Use Policy when they suspect a student is being exploited online?",
+      "ground_truth": "Under the Safeguarding Policy, staff must report suspicions to the Safeguarding Lead without investigating independently. Under the Acceptable Use Policy, staff must not use university systems to investigate the matter themselves. Any evidence found on university systems should be referred to the Safeguarding Lead who coordinates with authorities.",
+      "ground_truth_sources": ["Safeguarding-Policy-March-2022.pdf", "Acceptable-Use-Policy.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L3_006",
+      "level": 3,
+      "question": "How does the Fitness to Study Policy relate to a student's right to appeal under the Student Conduct and Discipline Rules?",
+      "ground_truth": "Both policies contain procedural safeguards. Under Fitness to Study, a student can challenge decisions through the applicable review mechanism. Under the Discipline Rules, a student has a full right of appeal against disciplinary decisions. Where a disciplinary process was paused pending fitness to study and the student subsequently faces disciplinary action, their appeal rights under the Discipline Rules apply in full. These rights are independent of each other.",
+      "ground_truth_sources": ["(FINAL)-202425-Fitness-to-Study-Policy.pdf", "(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L3_007",
+      "level": 3,
+      "question": "What obligations does MUM have to a student who requests erasure of their data while a disciplinary investigation is ongoing?",
+      "ground_truth": "The right to erasure is not absolute. Where a disciplinary investigation is ongoing, MUM can lawfully retain data necessary for the investigation under its legal obligations and legitimate interests. The university can refuse a deletion request where retention is needed to comply with a legal obligation or defend against legal claims. The student must be informed of the refusal and reasons. Data should be deleted once the investigation concludes and the retention period expires.",
+      "ground_truth_sources": ["Middlesex-University-Data-Protection-Policy.docx", "(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L3_008",
+      "level": 3,
+      "question": "How should MUM handle a situation involving overlapping safeguarding, fitness to study, and student misconduct concerns?",
+      "ground_truth": "The Safeguarding Policy takes priority where there is a risk of harm. The Safeguarding Lead is notified first and coordinates the initial response. Fitness to Study may be engaged if the affected student's health is impacted. The Discipline Rules govern the process against the student accused of misconduct, running as a separate independent investigation. Data sharing between processes must comply with the Data Protection Policy.",
+      "ground_truth_sources": ["Safeguarding-Policy-March-2022.pdf", "(FINAL)-202425-Fitness-to-Study-Policy.pdf", "(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Middlesex-University-Data-Protection-Policy.docx"],
+      "variants": {}
+    },
+    {
+      "id": "L3_009",
+      "level": 3,
+      "question": "What are the key differences between the Student Conduct and Discipline Rules 2024 and the Final 2024-25 version?",
+      "ground_truth": "Both documents govern student conduct at MUM and share the same core framework of minor and major misconduct categories, investigation procedures, and appeal rights. The Final 2024-25 version is more recent and may incorporate updated definitions, refined procedural steps, or revised sanction structures. Where discrepancies exist, the later Final 2024-25 version takes precedence.",
+      "ground_truth_sources": ["(FINAL)-2024-25-Student-Conduct-Discipline-rules.pdf", "Student Conduct and Discipline Rules 2024.pdf"],
+      "variants": {}
+    },
+    {
+      "id": "L3_010",
+      "level": 3,
+      "question": "How do MUM's data protection obligations interact with safeguarding responsibilities when deciding whether to share student data with an external agency?",
+      "ground_truth": "The Data Protection Policy requires a lawful basis for any disclosure and an additional condition for special category data. The Safeguarding Policy and the Appropriate Policy Document recognise that protecting individuals from serious harm can override normal data protection restrictions under the substantial public interest condition. The Safeguarding Lead is the designated decision-maker for such disclosures, which do not require the student's consent where serious harm prevention justifies disclosure.",
+      "ground_truth_sources": ["Middlesex-University-Data-Protection-Policy.docx", "Middlesex-University-Appropriate-Policy-Document.docx", "Safeguarding-Policy-March-2022.pdf"],
+      "variants": {}
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+venv/
+.env
+__pycache__/
+chroma_store/
+*.log
+.streamlit/
+docs/
+chat_sessions/
+backups/
+eval_results.json
+feedback_log.json
+index_log.json
+chatbot.log
+.vscode/
