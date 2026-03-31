@@ -359,6 +359,7 @@ section[data-testid="stSidebar"],
 .stat-box,
 .sec-head,
 .src-card,
+a.src-title,
 .badge,
 .doc-row,
 .theme-toggle-label,
@@ -538,9 +539,35 @@ section[data-testid="stSidebar"] [data-testid="stRadio"] [aria-checked="true"] +
     padding: 11px 15px;
     margin: 7px 0;
 }
-.src-title   { font-family: var(--font-sans); color: var(--blue-glow); font-size: 0.9em; font-weight: 600; }
-.src-meta    { font-family: var(--font-mono); color: var(--text-sub); font-size: 0.7em; margin-top: 3px; }
+a.src-title {
+    font-family: var(--font-sans);
+    color: var(--blue-glow) !important;
+    font-size: 0.9em;
+    font-weight: 600;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+a.src-title:hover {
+    color: var(--blue-light) !important;
+    text-decoration: underline;
+}
+a.src-title:visited { color: var(--blue-glow) !important; }
+.src-meta    { font-family: var(--font-mono); color: var(--text-dim); font-size: 0.7em; margin-top: 3px; }
+.src-meta code { font-family: var(--font-mono); color: var(--text-sub); font-size: 0.95em; background: transparent; }
 .src-preview { font-family: var(--font-sans); color: var(--text-sub); font-size: 0.8em; margin-top: 7px; font-style: italic; padding-left: 8px; border-left: 1px solid var(--border); line-height: 1.5; }
+
+/* expander header — ensure text is visible in dark mode */
+.stExpander [data-testid="stExpanderToggleDetails"] p,
+.stExpander summary span {
+    color: var(--blue-glow) !important;
+    font-weight: 500 !important;
+}
+.stExpander svg {
+    color: var(--blue-glow) !important;
+    fill: var(--blue-glow) !important;
+}
 
 /* badges */
 .badge      { display: inline-block; font-family: var(--font-mono); font-size: 0.7em; font-weight: 500; padding: 3px 10px; border-radius: 4px; letter-spacing: 0.8px; }
@@ -837,12 +864,8 @@ div[data-testid="stSlider"] [aria-valuenow="2"] {
 }
 
 /* =====================================================
-   SPINNER — loading indicator with CSS-only animation
+   SPINNER — themed container for native spinner
 ===================================================== */
-@keyframes mum-spin {
-    0%   { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 [data-testid="stSpinner"] > div {
     display: flex !important;
     align-items: center !important;
@@ -853,24 +876,15 @@ div[data-testid="stSlider"] [aria-valuenow="2"] {
     padding: 14px 20px !important;
     width: fit-content !important;
 }
-/* Hide Streamlit's default SVG spinner — we replace it with CSS */
+/* Theme the native spinner SVG for both light and dark */
 [data-testid="stSpinner"] svg {
-    display: none !important;
+    color: var(--blue-light) !important;
+    fill: var(--blue-light) !important;
+    stroke: var(--blue-light) !important;
 }
-/* CSS spinner ring — always visible and animated */
-[data-testid="stSpinner"] > div::before {
-    content: '' !important;
-    display: block !important;
-    flex-shrink: 0 !important;
-    width: 22px !important;
-    height: 22px !important;
-    min-width: 22px !important;
-    min-height: 22px !important;
-    border: 3px solid var(--border) !important;
-    border-top: 3px solid var(--blue-light) !important;
-    border-radius: 50% !important;
-    animation: mum-spin 0.8s linear infinite !important;
-    box-sizing: border-box !important;
+[data-testid="stSpinner"] svg circle,
+[data-testid="stSpinner"] svg path {
+    stroke: var(--blue-light) !important;
 }
 /* Spinner text */
 [data-testid="stSpinner"] span,

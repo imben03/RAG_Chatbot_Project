@@ -15,6 +15,21 @@ import chromadb
 
 load_dotenv()
 
+# Ensure static/ directory points to docs/ for Streamlit static file serving.
+# This lets source reference hyperlinks open the actual PDF/DOCX files.
+import platform, subprocess, shutil
+DOCS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'docs')
+STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
+if os.path.isdir(DOCS_DIR) and not os.path.exists(STATIC_DIR):
+    try:
+        if platform.system() == 'Windows':
+            subprocess.run(['cmd', '/c', 'mklink', '/J', STATIC_DIR, DOCS_DIR],
+                           capture_output=True, check=True)
+        else:
+            os.symlink(DOCS_DIR, STATIC_DIR, target_is_directory=True)
+    except Exception:
+        pass  # static serving won't work, links degrade gracefully
+
 # Load chatbot icon as base64 for embedding in HTML
 def load_icon_b64(path='chatbot_icon.png'):
     try:
@@ -574,10 +589,11 @@ def query_type_badge(qtype):
 
 def render_source_cards(sources):
     for s in sources:
+        static_url = f"/app/static/{s['file']}"
         st.markdown(f"""
         <div class="src-card">
-            <div class="src-title">📄 {s['title']}</div>
-            <div class="src-meta">{t('file_label')}: {s['file']}  ·  {t('relevance_label')}: {s['score']*100:.0f}%</div>
+            <a class="src-title" href="{static_url}" target="_blank" title="Open {s['file']}">📄 {s['title']}</a>
+            <div class="src-meta">{t('file_label')}: <code>{s['file']}</code>  ·  {t('relevance_label')}: {s['score']*100:.0f}%</div>
             <div class="src-preview">{s['preview']}</div>
         </div>
         """, unsafe_allow_html=True)
