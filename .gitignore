@@ -11,4 +11,4 @@ eval_results.json
 feedback_log.json
 index_log.json
 chatbot.log
-.vscode/
+static/
