@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:wght@600;700&display=swap');
 
-/* =====================================================
-   LIGHT THEME — default :root
-   Dark theme variables are injected by app.py when
-   dark_mode = True, overriding these at runtime.
-===================================================== */
+/* LIGHT THEME — default :root
+   Dark theme variables are injected by app.py whendark_mode = True, overriding these at runtime.*/
 :root {
     --bg-base:       #F8FAFB;
     --bg-panel:      #EEF2F6;
@@ -100,10 +97,8 @@ header[data-testid="stHeader"] {
     color: var(--text-sub) !important;
 }
 
-/* =====================================================
-   LANDING HERO — shown when chat is empty
-   Merges greeting, branding, and topic hints in one block.
-===================================================== */
+/*Landing hero — shown when chat is empty
+   Merges greeting, branding, and topic hints in one block. */
 .landing-hero {
     text-align: center;
     padding: 28px 20px 18px 20px;
@@ -177,9 +172,7 @@ header[data-testid="stHeader"] {
     text-align: center !important;
 }
 
-/* =====================================================
-   CHAT TOPBAR — slim bar shown when messages exist
-===================================================== */
+/* chat topbar — slim bar shown when messages exist */
 .chat-topbar {
     display: flex;
     align-items: center;
@@ -336,11 +329,7 @@ section[data-testid="stSidebar"] [data-testid="stToggle"] > label {
     color: var(--text-sub) !important;
 }
 
-/* =====================================================
-   SMOOTH THEME TRANSITIONS
-   Applied to all major elements so light ↔ dark
-   fades smoothly instead of snapping.
-===================================================== */
+/* smooth theme transitions */
 html, body,
 [class*="css"],
 .main .block-container,
@@ -728,9 +717,7 @@ section[data-testid="stSidebar"] .stButton > button {
     color: var(--blue-glow) !important;
 }
 
-/* =====================================================
-   ALERTS
-===================================================== */
+/* Alerts */
 .stAlert {
     background: var(--bg-card) !important;
     border-radius: 8px !important;
@@ -748,9 +735,7 @@ section[data-testid="stSidebar"] .stButton > button {
     margin-right: 16px !important;
 }
 
-/* =====================================================
-   SELECT BOX
-===================================================== */
+/* Select Box */
 .stSelectbox > div > div {
     background: var(--bg-card) !important;
     border: 1px solid var(--border) !important;
@@ -759,9 +744,7 @@ section[data-testid="stSidebar"] .stButton > button {
     font-family: var(--font-sans) !important;
 }
 
-/* =====================================================
-   DOWNLOAD BUTTON
-===================================================== */
+/* Download Button */
 .stDownloadButton > button {
     background: rgba(34,197,94,0.07) !important;
     border: 1px solid rgba(34,197,94,0.3) !important;
@@ -774,9 +757,7 @@ section[data-testid="stSidebar"] .stButton > button {
     background: rgba(34,197,94,0.14) !important;
 }
 
-/* =====================================================
-   TABS — underline only, no fill on hover
-===================================================== */
+/* TABS — underline only, no fill on hover */
 .stTabs [data-baseweb="tab-list"] {
     background: transparent !important;
     border-bottom: 1px solid var(--border) !important;
@@ -820,14 +801,14 @@ section[data-testid="stSidebar"] .stButton > button {
 
 /* thumb styling per value */
 div[data-testid="stSlider"] [role="slider"] {
-    background: #ef4444 !important;
-    border-color: #ef4444 !important;
+    background: #b35b5b !important;
+    border-color: #b35b5b !important;
     box-shadow: 0 0 0 3px rgba(239,68,68,0.25) !important;
     transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease !important;
 }
 div[data-testid="stSlider"] [aria-valuenow="0"] {
-    background: #ef4444 !important;
-    border-color: #ef4444 !important;
+    background: #b35b5b!important;
+    border-color: #b35b5b !important;
     box-shadow: 0 0 0 3px rgba(239,68,68,0.25) !important;
 }
 div[data-testid="stSlider"] [aria-valuenow="1"] {
@@ -841,17 +822,13 @@ div[data-testid="stSlider"] [aria-valuenow="2"] {
     box-shadow: 0 0 0 3px rgba(34,197,94,0.25) !important;
 }
 
-/* =====================================================
-   SCROLLBAR
-===================================================== */
+/* Scrollbar styling for document index and any other overflow areas */
 ::-webkit-scrollbar       { width: 5px; }
 ::-webkit-scrollbar-track { background: var(--bg-base); }
 ::-webkit-scrollbar-thumb { background: var(--navy); border-radius: 3px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--blue); }
 
-/* =====================================================
-   FOOTER
-===================================================== */
+/* Footer */
 .mum-footer {
     text-align: center;
     font-family: var(--font-mono);
@@ -863,9 +840,9 @@ div[data-testid="stSlider"] [aria-valuenow="2"] {
     margin-top: 12px;
 }
 
-/* =====================================================
-   SPINNER — themed container for native spinner
-===================================================== */
+/*
+   Spinner — themed container for native spinner
+ */
 [data-testid="stSpinner"] > div {
     display: flex !important;
     align-items: center !important;
