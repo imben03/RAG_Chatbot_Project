@@ -84,10 +84,7 @@ def file_hash(path):
         h.update(f.read())
     return h.hexdigest()
 
-# ──────────────────────────────────────────────────────────────────────
 # Version Detection — Auto-replace outdated documents
-# ──────────────────────────────────────────────────────────────────────
-
 # Matches 4-digit years (2000–2099) anywhere in a filename
 YEAR_PATTERN = re.compile(r'(20\d{2})')
 
@@ -420,7 +417,7 @@ def ingest_directory(doc_dir='docs'):
         print('Supported formats: PDF, DOCX, HTML, HTM')
         return
 
-    # ── Version Detection ─────────────────────────────────────────────
+    # Version Detection 
     # Group files by base name, keep only the latest year for each group.
     # Outdated versions are removed from ChromaDB and the index log.
     print(f'Found {len(all_files)} document(s) — checking for version duplicates...\n')
@@ -444,8 +441,7 @@ def ingest_directory(doc_dir='docs'):
 
     if superseded > 0:
         print(f'\n  Removed {superseded} outdated document version(s) from the database.\n')
-    # ──────────────────────────────────────────────────────────────────
-
+   
     print(f'Proceeding with {len(files)} document(s) to process...')
     print(f'Database path : {DB_PATH}')
     print(f'Already logged: {len(index_log)} document(s)\n')
