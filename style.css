@@ -841,8 +841,12 @@ div[data-testid="stSlider"] [aria-valuenow="2"] {
 }
 
 /*
-   Spinner — themed container for native spinner
+   Spinner — themed container + CSS spinning animation
  */
+@keyframes mumSpin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 [data-testid="stSpinner"] > div {
     display: flex !important;
     align-items: center !important;
@@ -853,20 +857,32 @@ div[data-testid="stSlider"] [aria-valuenow="2"] {
     padding: 14px 20px !important;
     width: fit-content !important;
 }
-/* Theme the native spinner SVG for both light and dark */
-[data-testid="stSpinner"] svg {
-    color: var(--blue-light) !important;
-    fill: var(--blue-light) !important;
-    stroke: var(--blue-light) !important;
+/* Add a CSS spinning circle before the spinner text */
+[data-testid="stSpinner"] > div::before {
+    content: '' !important;
+    display: inline-block !important;
+    width: 18px !important;
+    height: 18px !important;
+    min-width: 18px !important;
+    border: 2.5px solid var(--border-mid) !important;
+    border-top-color: var(--blue-light) !important;
+    border-radius: 50% !important;
+    animation: mumSpin 0.7s linear infinite !important;
 }
-[data-testid="stSpinner"] svg circle,
-[data-testid="stSpinner"] svg path {
-    stroke: var(--blue-light) !important;
+/* Hide the native Streamlit spinner SVG/animation to avoid double icons */
+[data-testid="stSpinner"] svg,
+[data-testid="stSpinner"] canvas,
+[data-testid="stSpinner"] lottie-player {
+    display: none !important;
 }
 /* Spinner text */
 [data-testid="stSpinner"] span,
-[data-testid="stSpinner"] p {
+[data-testid="stSpinner"] p,
+[data-testid="stSpinner"] > div > span,
+[data-testid="stSpinner"] > div > div > span,
+.stSpinner span {
     color: var(--text-main) !important;
     font-family: var(--font-sans) !important;
     font-size: 0.9em !important;
+    opacity: 1 !important;
 }
