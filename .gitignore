@@ -12,3 +12,6 @@ feedback_log.json
 index_log.json
 chatbot.log
 static/
+check_gt.py
+show_faith.py
+show_queries.py
