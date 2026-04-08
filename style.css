@@ -841,48 +841,34 @@ div[data-testid="stSlider"] [aria-valuenow="2"] {
 }
 
 /*
-   Spinner — themed container + CSS spinning animation
+   Spinner — custom HTML spinner (replaces st.spinner)
  */
 @keyframes mumSpin {
     0%   { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-[data-testid="stSpinner"] > div {
-    display: flex !important;
-    align-items: center !important;
-    gap: 12px !important;
-    border: 1px solid var(--border-mid) !important;
-    background: var(--bg-card) !important;
-    border-radius: 10px !important;
-    padding: 14px 20px !important;
-    width: fit-content !important;
+.mum-spinner {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--border-mid);
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 14px 24px;
+    margin: 8px 0;
+    width: fit-content;
 }
-/* Add a CSS spinning circle before the spinner text */
-[data-testid="stSpinner"] > div::before {
-    content: '' !important;
-    display: inline-block !important;
-    width: 18px !important;
-    height: 18px !important;
-    min-width: 18px !important;
-    border: 2.5px solid var(--border-mid) !important;
-    border-top-color: var(--blue-light) !important;
-    border-radius: 50% !important;
-    animation: mumSpin 0.7s linear infinite !important;
+.mum-spinner-ring {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    border: 2.5px solid var(--border-mid);
+    border-top-color: var(--blue);
+    border-radius: 50%;
+    animation: mumSpin 0.7s linear infinite;
 }
-/* Hide the native Streamlit spinner SVG/animation to avoid double icons */
-[data-testid="stSpinner"] svg,
-[data-testid="stSpinner"] canvas,
-[data-testid="stSpinner"] lottie-player {
-    display: none !important;
-}
-/* Spinner text */
-[data-testid="stSpinner"] span,
-[data-testid="stSpinner"] p,
-[data-testid="stSpinner"] > div > span,
-[data-testid="stSpinner"] > div > div > span,
-.stSpinner span {
-    color: var(--text-main) !important;
-    font-family: var(--font-sans) !important;
-    font-size: 0.9em !important;
-    opacity: 1 !important;
+.mum-spinner span {
+    color: var(--text-main);
+    font-family: var(--font-sans);
+    font-size: 0.9em;
 }

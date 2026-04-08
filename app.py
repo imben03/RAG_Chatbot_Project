@@ -15,21 +15,6 @@ import chromadb
 
 load_dotenv()
 
-# Ensure static/ directory points to docs/ for Streamlit static file serving.
-# This lets source reference hyperlinks open the actual PDF/DOCX files.
-import platform, subprocess, shutil
-DOCS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'docs')
-STATIC_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'static')
-if os.path.isdir(DOCS_DIR) and not os.path.exists(STATIC_DIR):
-    try:
-        if platform.system() == 'Windows':
-            subprocess.run(['cmd', '/c', 'mklink', '/J', STATIC_DIR, DOCS_DIR],
-                           capture_output=True, check=True)
-        else:
-            os.symlink(DOCS_DIR, STATIC_DIR, target_is_directory=True)
-    except Exception:
-        pass  # static serving won't work, links degrade gracefully
-
 # Load chatbot icon as base64 for embedding in HTML
 def load_icon_b64(path='chatbot_icon.png'):
     try:
@@ -589,14 +574,30 @@ def query_type_badge(qtype):
 
 def render_source_cards(sources):
     for s in sources:
-        static_url = f"/app/static/{s['file']}"
         st.markdown(f"""
         <div class="src-card">
-            <a class="src-title" href="{static_url}" target="_blank" title="Open {s['file']}">📄 {s['title']}</a>
-            <div class="src-meta">{t('file_label')}: <code>{s['file']}</code>  ·  {t('relevance_label')}: {s['score']*100:.0f}%</div>
+            <div class="src-title">📄 {s['title']}</div>
+            <div class="src-meta">{t('file_label')}: {s['file']}  ·  {t('relevance_label')}: {s['score']*100:.0f}%</div>
             <div class="src-preview">{s['preview']}</div>
         </div>
         """, unsafe_allow_html=True)
+
+from contextlib import contextmanager
+
+@contextmanager
+def custom_spinner(text=''):
+    """Custom HTML spinner that works in both light and dark themes."""
+    ph = st.empty()
+    ph.markdown(f"""
+    <div class="mum-spinner">
+        <div class="mum-spinner-ring"></div>
+        <span>{text}</span>
+    </div>
+    """, unsafe_allow_html=True)
+    try:
+        yield
+    finally:
+        ph.empty()
 
 def export_chat_history():
     if not st.session_state.messages:
@@ -703,7 +704,7 @@ with st.sidebar:
         key='policy_search_input'
     )
     if search_query and len(search_query) > 2:
-        with st.spinner(t('searching')):
+        with custom_spinner(t('searching')):
             hits = policy_search(search_query, top_k=4)
         if hits:
             for hit in hits:
@@ -758,7 +759,7 @@ with st.sidebar:
             selected_title = display_titles[sel_idx]
 
             if st.button(t('gen_summary'), use_container_width=True, type='primary'):
-                with st.spinner(t('gen_summary_spin')):
+                with custom_spinner(t('gen_summary_spin')):
                     try:
                         t0 = time.time()
                         summary, srcs, score, qtype = answer(
@@ -1028,7 +1029,7 @@ with tab_chat:
         ]
 
         with st.chat_message('assistant', avatar=ASSISTANT_AVATAR):
-            with st.spinner(t('searching')):
+            with custom_spinner(t('searching')):
                 t0 = time.time()
                 try:
                     response, srcs, score, qtype = answer(
@@ -1161,7 +1162,7 @@ with tab_compare:
             st.markdown(f'**{t("comparing_label")}** {title_a} &nbsp;↔&nbsp; {title_b}')
 
             if st.button(t('gen_comparison'), use_container_width=True, type='primary'):
-                with st.spinner(t('comparing', a=title_a, b=title_b)):
+                with custom_spinner(t('comparing', a=title_a, b=title_b)):
                     try:
                         t0 = time.time()
                         response, srcs, score, qtype = compare_documents(
